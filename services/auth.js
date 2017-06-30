@@ -20,7 +20,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((userObj, done) => {
     User
-        .findByUserName(userObj.userName)
+        .findByUserName(userObj.username)
         .then(user => {
             done(null, user);
         })
@@ -42,9 +42,11 @@ passport.use(
                 .create(req.body.user)
                 .then((user) => {
                     return done(null, user);
+                    console.log('before error: ', user)
                 })
                 .catch((err) => {
-                    console.log('error from your local signup', err);
+                    console.log(req.body.user, User, 'error from your local signup', err);
+                    // console.log(user.userName, user.password)
                     return done(null, false)
                 });
         })

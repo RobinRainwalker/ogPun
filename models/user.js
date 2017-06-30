@@ -1,30 +1,31 @@
 const bcrypt = require('bcryptjs');
-const db = require('./setup');
+const db = require('../models/setup');
 
 const User = {};
 
 function create (user) {
 	const password = bcrypt.hashSync(user.password, 10);
-
+	console.log('in the model!!!!', user.name, password);
 	return db.oneOrNone(`
 		INSERT INTO users
-		(userName, password_digest)
+		(username, password_digest)
 		VALUES
 		($1, $2)
-		RETURNING *;`
-		[user.userName, password]
+		RETURNING *`,
+		[user.name, password]
 	);
-	console.log('creating user');
+	// console.log('creating user');
 };
 
-function findByUserName (name) {
+function findByUserName (username) {
+	console.log('findByUserName fnctn saying hello')
 	return db.oneOrNone(`
 		SELECT * 
 		From users
-		WHERE userName = $1;`,
-		[userName]
+		WHERE username = $1;`,
+		[username]
 	);
-	console.log('finding user by username');
+	// console.log('finding user by username');
 };
 
 module.exports = { create, findByUserName };
