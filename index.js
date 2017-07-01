@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express'),
 	  bodyParser = require('body-parser'),
 	  cookieParser = require('cookie-parser'),
@@ -5,8 +7,8 @@ const express = require('express'),
 	  session = require('express-session'),
 	  // userController = require('./controllers/users'),
 	  app = express(),
-	  port = process.env.PORT || 8080;
-
+	  PORT = process.env.PORT || 3000;
+ 
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
@@ -28,11 +30,9 @@ app.use(cookieParser());
 
 app.use('/', require('./controllers/users'));
 
-
-app.listen(port, () => console.log(`matrix online @ ${port}`))
-
 app.get('/', (req, res) => {
 	console.log('Going to landing page')
 	res.render('./landing');
 });
 
+app.listen(PORT, () => console.log(`matrix online @ ${PORT}`));
