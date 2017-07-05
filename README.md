@@ -23,10 +23,3 @@ Unresolved issues:
 	Comments carry over from day to day.
 		late stage discovery and bigger priories left this these issues to be fixed before a full deployment can be made.
 	Deleting and updating models were made but not utilized in the current version of the app
-
-5 minutes: A presentation deck - Google Slides, Keynote, PowerPoint
-
-At least 5 slides
-Use easy-to-understand language and avoid too much "technical" terminology
-Include wireframes that shows your app
-Answer the following questions: - What is the your app about? - What features does it include? - Were there any constraints you had to work with? (e.g. technological, timing, content, etc.) - Is there any other information you think might help us (your stakeholders) understand what you've built?
