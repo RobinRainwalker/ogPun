@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS quotes CASCADE;
 DROP TABLE IF EXISTS comments CASCADE;
-DROP TABLE IF EXISTS qod CASCADE;
 DROP TABLE IF EXISTS groans CASCADE;
 DROP TABLE IF EXISTS giggles CASCADE;
 
@@ -14,7 +13,9 @@ CREATE TABLE users (
 CREATE TABLE quotes (
 	id SERIAL PRIMARY KEY,
 	bg_image_url TEXT,
-	quote TEXT
+	created_date TIMESTAMP,
+	quote TEXT,
+	author TEXT
 );
 
 CREATE TABLE comments (
@@ -26,17 +27,14 @@ CREATE TABLE comments (
 	pun TEXT
 );
 
-CREATE TABLE qod (
-	qod_id INT REFERENCES quotes(id),
-	created_date DATE
-);
-
 CREATE TABLE groans (
+	id SERIAL PRIMARY KEY,
 	comment_id INT REFERENCES comments(id),
 	user_id INT REFERENCES users(id)
 );
 
 CREATE TABLE giggles (
+	id SERIAL PRIMARY KEY,
 	comment_id INT REFERENCES comments(id),
 	user_id INT REFERENCES users(id)
 );

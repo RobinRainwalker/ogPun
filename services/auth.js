@@ -1,12 +1,13 @@
 const passport = require('passport');
-const User = require('../models/user');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 const passportInstance = passport.initialize();
 const passportSession = passport.session();
+const Models = require('../models/models');
+const User = Models.User;
 
 function restrict(req, res, next) {
-    console.log(req.isAuthenticated());
+    console.log('restrict test', req.isAuthenticated());
     if (req.isAuthenticated()) {
         next();
     } else {
@@ -20,7 +21,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((userObj, done) => {
     User
-        .findByUserName(userObj.username)
+        .findUserByUsername(userObj.username)
         .then(user => {
             done(null, user);
         })
@@ -39,7 +40,7 @@ passport.use(
         },
         (req, name, password, done) => {
             User
-                .create(req.body.user)
+                .createUser(req.body.user)
                 .then((user) => {
                     return done(null, user);
                     console.log('before error: ', user)
@@ -61,18 +62,20 @@ passport.use(
         },
         (req, name, password, done) => {
             User
-                .findByUserName(name)
+                .findUserByUsername(name)
                 .then((user) => {
                     if (user) {
                         const isAuthed = bcrypt.compareSync(password, user.password_digest);
-                        console.log('is Authd:')
-                        console.log(isAuthed)
+                        // console.log('is Authd:')
+                        // console.log(isAuthed)
                         if (isAuthed) {
                             return done(null, user);
                         } else {
+                            // console.log('Found user but login failed.')
                             return done(null, false);
                         }
                     } else {
+                        // console.log('No user found.');
                         return done(null, false);
                     }
                 });

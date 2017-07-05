@@ -1,21 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>frontpage</title>
-	<link rel="stylesheet" href="/css/style.css">
-  <script src='/js/jquery.js'></script>
-  <script src='/js/script.js'></script>
+    <meta charset="UTF-8">
+    <title>frontpage</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/icons/font/flaticon.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src='/js/jquery.js'></script>
+    <script src='/js/script.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src='/bootstrap/js/bootstrap.min.js'></script>
+    <script src='/js/controllers/frontPageController.js'></script>
 </head>
+
 <body>
-<img class="randImg" src="{{ image }}" alt="background image">
-	<h1>mainfrontpagewhatever</h1>
-	<a href="/profile">Go to your profile bub</a>
-
-
-
-<footer class="credit">
-<span style="z-index:50;font-size:0.9em;"><img src="https://theysaidso.com/branding/theysaidso.png" height="20" width="20" alt="theysaidso.com"/><a href="https://theysaidso.com" title="Powered by quotes from theysaidso.com" style="color: #9fcc25; margin-left: 4px; vertical-align: middle;">theysaidso.com</a></span>
-</footer>
+    <div class="container-fluid p-0">
+        <!-- nav start -->
+        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-lable="Toggle navigation"></button>
+            <a href="#" class="navbar-brand">ogPuns</a>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a href="/front" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="/profile" class="nav-link">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- nav end -->
+        <!-- content start -->
+        <div class="container">
+            <div class="row">
+                <div class="jumbotron mt-5">
+                    <h1 class="display-5">{{quote.quote}}</h1>
+                    <p class="lead">- {{quote.author}}
+                        <span class="invisible" id="quoteId">{{quote.id}}</span>
+                    </p>
+                    <footer class="credit">
+                        <span style="z-index:50;font-size:0.9em;"><img src="https://theysaidso.com/branding/theysaidso.png" height="20" width="20" alt="theysaidso.com"/><a href="https://theysaidso.com" title="Powered by quotes from theysaidso.com" style="color: #9fcc25; margin-left: 4px; vertical-align: middle;">theysaidso.com</a></span>
+                    </footer>
+                </div>
+            </div>
+            {{ #comments }}
+            <div class="row">
+                <div class="card w-100 mt-4">
+                    <div class="card-block">
+                        <div class="container-fluid">
+                            <div class="row no-gutters justify-content-between">
+                                <div class="col">
+                                    <h6 class="text-muted display-5">{{ user.username }}
+                                    <small class="text-muted ml-2"> about {{humanFriendlyTimestamp}}</small></h6>
+                                </div>
+                                <div class="col text-right">
+                                    <div class="d-inline">
+                                        <span class="flaticon-happy mr-3"></span>{{giggleCount}}
+                                        <span class="flaticon-goofy mr-3"></span>{{groanCount}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row no-gutters">
+                                <p class="lead">{{ pun }}</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="#" class="btn btn-sm btn-outline-success card-link giggle w-100">
+                                        <span class="invisible giggles p-0 m-0">{{id}}</span> Giggle
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="#" class="btn btn-sm btn-outline-info card-link groan w-100">
+                                        <span class="invisible groans p-0 m-0">{{id}}</span> Groan
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ /comments }}
+            <div class="row my-5 p-5">
+            </div>
+        </div>
+        <!-- content end -->
+        <!-- footer start -->
+        <nav class="navbar fixed-bottom navbar-inverse bg-inverse">
+            <div class="container d-inline">
+                <form class="submit-pun">
+                    <div class="row">
+                        <div class="col-9">
+                            <input type="text" placeholder="enter your pun ..." class="form-control mr-sm-2 pun-text-input">
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-primary" type="submit">Submit Your Pun</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+        <!-- footer end -->
+    </div>
 </body>
+
 </html>
+<!-- 
+<img class="randImg" src="{{ image }}" alt="background image">
+    <h1>mainfrontpagewhatever</h1>
+    <a href="/profile">Go to your profile bub</a>
